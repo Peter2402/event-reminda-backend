@@ -1,0 +1,15 @@
+from django.contrib import admin
+from django.contrib.admin import AdminSite
+from .models import User, Event, Reminder, NotificationLog
+from django.contrib.auth.admin import UserAdmin
+
+# Customize admin site branding
+admin.site.site_header = "Event Reminda"
+admin.site.site_title = "Event Reminda Admin"
+admin.site.index_title = "Welcome to Event Reminda Admin Panel"
+
+# Register models
+admin.site.register(User, UserAdmin)
+admin.site.register(Event)
+admin.site.register(Reminder)
+admin.site.register(NotificationLog)
