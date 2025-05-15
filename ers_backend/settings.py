@@ -25,7 +25,9 @@ SECRET_KEY = 'django-insecure--kzn4@%2wq1&=$*()qz#so$r!6kw-o6f3$b!&0!k1z_f=)$2vc
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['event-reminda-backend.onrender.com']
+ALLOWED_HOSTS = ['event-reminda-backend.onrender.com',
+           "event-reminder-backend-1u21.vercel.app"  ,  
+                 ]
 
 
 
@@ -40,10 +42,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'core',
+    'corsheaders',
 
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -53,6 +57,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
 
 ROOT_URLCONF = 'ers_backend.urls'
 
@@ -131,3 +136,7 @@ import os
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+CORS_ALLOWED_ORIGINS = [
+    "https://event-reminder-backend-1u21.vercel.app",
+]

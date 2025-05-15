@@ -21,7 +21,7 @@ function EventForm() {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post("https://event-reminda-backend.onrender.com/api/events/", formData)
+      .post("https://event-reminda-backend.onrender.com/admin/", formData)
       .then(() => alert("Event created!"))
       .catch(() => alert("Error submitting event"));
   };
