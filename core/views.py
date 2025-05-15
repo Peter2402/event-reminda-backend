@@ -7,4 +7,5 @@ class EventViewSet(viewsets.ModelViewSet):
     queryset = Event.objects.all()
     serializer_class = EventSerializer
 
-# Create your views here.
+def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
