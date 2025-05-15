@@ -4,9 +4,9 @@ from .models import User, Event, Reminder, NotificationLog
 from django.contrib.auth.admin import UserAdmin
 
 # Customize admin site branding
-admin.site.site_header = "Event Reminda"
-admin.site.site_title = "Event Reminda Admin"
-admin.site.index_title = "Welcome to Event Reminda Admin Panel"
+admin.site.site_header = "Event Reminder"
+admin.site.site_title = "Event Reminder Admin"
+admin.site.index_title = "Welcome to Event Reminder Admin Panel"
 
 # Register models
 admin.site.register(User, UserAdmin)
