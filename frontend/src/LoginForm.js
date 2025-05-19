@@ -1,53 +1,40 @@
-import React, { useState } from "react";
 import axios from "axios";
+import React, { useState } from "react";
 
 function LoginForm() {
-  const [formData, setFormData] = useState({
-    username: "",
-    password: "",
-  });
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
 
-  const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
-  };
-
-  const handleSubmit = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-    axios.post("http://127.0.0.1:8000/api/login/", formData)
-      .then((res) => {
-        localStorage.setItem("token", res.data.token);
-        alert("Login successful! 🔐");
-      })
-      .catch(() => {
-        alert("Login failed ❌. Check username and password.");
+    try {
+      const res = await axios.post("https://event-reminda-backend.onrender.com/admin/core/user/", {
+        username,
+        password,
       });
+      alert("✅ Login successful!");
+      console.log("Token:", res.data.token);
+    } catch (err) {
+      alert("❌ Login failed. Check username and password.");
+    }
   };
 
   return (
-    <form onSubmit={handleSubmit} className="max-w-md mx-auto p-6 bg-white shadow rounded">
-      <h2 className="text-xl font-bold mb-4">Log In</h2>
+    <form onSubmit={handleLogin}>
+      <h2>Log In</h2>
       <input
         type="text"
-        name="username"
         placeholder="Username"
-        onChange={handleChange}
-        className="w-full border p-2 mb-3 rounded"
-        required
+        value={username}
+        onChange={(e) => setUsername(e.target.value)}
       />
       <input
         type="password"
-        name="password"
         placeholder="Password"
-        onChange={handleChange}
-        className="w-full border p-2 mb-3 rounded"
-        required
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
       />
-      <button className="bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700">
-        Log In
-      </button>
+      <button type="submit">Log In</button>
     </form>
   );
 }

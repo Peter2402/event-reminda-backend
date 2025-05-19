@@ -15,7 +15,8 @@ SECRET_KEY = 'django-insecure--kzn4@%2wq1&=$*()qz#so$r!6kw-o6f3$b!&0!k1z_f=)$2vc
 DEBUG = True
 
 ALLOWED_HOSTS = ["event-reminda-backend.onrender.com",
-           "event-reminder-backend-1u21.vercel.app"  ,  
+           "event-reminder-backend-1u21.vercel.app"  , 
+"event-reminder-backend-git-main-peter2402s-projects.vercel.app"
            "127.0.0.1", "localhost",
                  ]
 
@@ -132,9 +133,14 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 CORS_ALLOWED_ORIGINS = [
     "https://event-reminder-backend-1u21.vercel.app",
+    "https://event-reminder-backend.vercel.app/",
+    "https://event-reminder-backend-git-main-peter2402s-projects.vercel.app", 
 ]
 
+CORS_ALLOW_ALL_ORIGINS = True
+
 REST_FRAMEWORK = {
+
     'DEFAULT_AUTHENTICATION_CLASSES': [
     'rest_framework.authentication.TokenAuthentication',
 ]
