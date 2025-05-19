@@ -14,9 +14,12 @@ urlpatterns = [
     path('admin/', admin.site.urls),
 
     # API endpoints
-    path('api/', include(router.urls)),              # Event API
-    path('api/register/', RegisterView.as_view(), name='register'),  # Signup
-    path('api/login/', LoginView.as_view(), name='login'),           # Token Login
-    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),  # JWT login (if used)
-    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),  # JWT refresh
+ path('api/', include([
+        path('events/', include(router.urls)),  # Optional (already included below)
+        path('register/', RegisterView.as_view(), name='register'),  # ✅ This is what was missing
+        path('login/', LoginView.as_view(), name='login'),
+        path('token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+        path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+        path('', include(router.urls)),  # Keep this to serve /api/events/
+    ])),
 ]

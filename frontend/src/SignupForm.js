@@ -5,51 +5,31 @@ function SignupForm() {
   const [formData, setFormData] = useState({
     username: "",
     email: "",
-    password: "",
+    password: ""
   });
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    axios
-      .post("https://event-reminda-backend.onrender.com/admin/core/user/", formData)
-      .then(() => alert("Signup successful! 🎉"))
-      .catch(() => alert("Signup failed ❌"));
+    try {
+      await axios.post("https://event-reminda-backend.onrender.com/admin", formData);
+      alert("✅ Signup successful!");
+    } catch (error) {
+      alert("❌ Signup failed");
+      console.error(error.response?.data || error.message);
+    }
   };
 
   return (
-    <form onSubmit={handleSubmit} className="max-w-md mx-auto p-6 bg-white shadow rounded">
-      <h2 className="text-xl font-bold mb-4">Sign Up</h2>
-      <input
-        name="username"
-        type="text"
-        placeholder="Username"
-        onChange={handleChange}
-        className="w-full border p-2 mb-3 rounded"
-        required
-      />
-      <input
-        name="email"
-        type="email"
-        placeholder="Email"
-        onChange={handleChange}
-        className="w-full border p-2 mb-3 rounded"
-        required
-      />
-      <input
-        name="password"
-        type="password"
-        placeholder="Password"
-        onChange={handleChange}
-        className="w-full border p-2 mb-3 rounded"
-        required
-      />
-      <button className="bg-indigo-600 text-white py-2 px-4 rounded hover:bg-indigo-700" type="submit">
-        Sign Up
-      </button>
+    <form onSubmit={handleSubmit}>
+      <input name="username" onChange={handleChange} placeholder="Username" required />
+      <input name="email" onChange={handleChange} placeholder="Email" required />
+      <input name="password" type="password" onChange={handleChange} placeholder="Password" required />
+      <button type="submit">Sign Up</button>
     </form>
   );
 }
